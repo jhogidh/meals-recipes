@@ -1,0 +1,13 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./RootLayout.jsx";
+import { RouterProvider } from "react-router-dom";
+import router from "./router.jsx";
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <RouterProvider router={router} />
+  </StrictMode>
+);
