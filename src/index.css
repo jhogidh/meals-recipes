@@ -1,13 +1,29 @@
-/*
- File ini bisa digunakan untuk styling global atau animasi
- yang Anda ingin gunakan di seluruh aplikasi.
-*/
+/* -- Font harus diimpor di baris paling atas -- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
 @import "tailwindcss";
 
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out;
+/* -- Latar belakang gradasi aurora yang bergerak -- */
+body {
+  @apply font-sans; /* Menggunakan font Inter yang diimpor */
+  background: linear-gradient(-45deg, #fde68a, #fca5a5, #a78bfa, #93c5fd);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* -- Animasi kustom -- */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -16,5 +32,69 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* -- Komponen kustom ditambahkan menggunakan @layer -- */
+@layer components {
+  /* -- Desain Tombol -- */
+  .btn {
+    @apply px-5 py-3 rounded-full font-bold text-base shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white hover:shadow-xl hover:from-violet-600 hover:to-fuchsia-600 focus:ring-violet-300;
+  }
+  .btn-secondary {
+    @apply bg-white/70 text-gray-800 backdrop-blur-sm border border-white/20 hover:bg-white focus:ring-gray-200;
+  }
+
+  /* -- Desain Kartu -- */
+  .card-item {
+    @apply relative overflow-hidden rounded-2xl bg-white/30 backdrop-blur-lg shadow-lg cursor-pointer transform transition-transform duration-300 hover:-translate-y-2 border border-white/30;
+  }
+
+  /* -- Efek shimmer untuk loading skeleton -- */
+  .animate-shimmer {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  .animate-shimmer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.5) 60%,
+      rgba(255, 255, 255, 0)
+    );
+    animation: shimmer 2s infinite;
   }
 }

@@ -1,27 +1,19 @@
 import { createHashRouter } from "react-router-dom";
-import RootLayout from "./RootLayout.jsx";
-import RandomMeal from "./pages/RandomMeal.jsx";
-import SearchMeal from "./pages/SearchMeal.jsx";
-import MealById from "./pages/MealById.jsx";
+import RootLayout from "./components/RootLayout.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import SearchResultsPage from "./pages/SearchResultsPage.jsx";
+import CategoryPage from "./pages/CategoryPage.jsx";
+import MealDetailPage from "./pages/MealDetailPage.jsx";
 
-// File ini mendefinisikan semua URL dan komponen halaman yang sesuai.
 const router = createHashRouter([
   {
     path: "/",
-    element: <RootLayout />, // Layout utama yang selalu tampil
+    element: <RootLayout />,
     children: [
-      {
-        index: true, // Halaman default (path: "/")
-        element: <RandomMeal />,
-      },
-      {
-        path: "search", // path: "/search"
-        element: <SearchMeal />,
-      },
-      {
-        path: "meal/:mealId", // path: "/meal/12345"
-        element: <MealById />,
-      },
+      { index: true, element: <HomePage /> },
+      { path: "search/:query", element: <SearchResultsPage /> },
+      { path: "category/:name", element: <CategoryPage /> },
+      { path: "meal/:id", element: <MealDetailPage /> },
     ],
   },
 ]);
