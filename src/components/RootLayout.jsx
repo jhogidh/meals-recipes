@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { LogoIcon } from "./Icons.jsx";
 import Footer from "../Footer.jsx";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout() {
   return (
@@ -21,6 +22,7 @@ export default function RootLayout() {
         <Outlet />
       </main>
       <Footer />
+      <Analytics />
     </div>
   );
 }
